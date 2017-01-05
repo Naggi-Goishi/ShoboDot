@@ -2,22 +2,22 @@
 
 ![ShoboDot Welcome](img/shobodot_welcome.png)
 
-*ShoboDot is a easy way to embed the dots canvas into your app*
+*ShoboDot is a easy way to embed the dots canvas into your app*<br>
 This is all written in pure Javascript.
 
 # How to setup
 
 You need only three steps.
 
-1. Include shobodot.min.js in your header of HTML file.
+First. Include shobodot.min.js in your header of HTML file.
 ```html
 <script src='path/to/shobodot.min.js'></script>
 ```
-2. Prepare the element, whose class is shobodot and set height and width of it as you like.
+Second. Prepare the element, whose class is shobodot and set height and width of it as you like.
 ```html
 <div class='shobodot' style='height:100px; width:100%;'></div>
 ```
-3. Write one line of Javascript.
+Third. Write one line of Javascript.
 ```html
 <script>
   var shobodot = new ShoboDot();
@@ -60,6 +60,7 @@ By default, they both are false.
 
 # Contribution
 
-I would welcome any kind of contribution.
-However, before making any pull request, I would be appreciate if you post an issue unless your change is fixing obvious bugs.
+I would welcome any kind of contribution.<br>
+However, before making any pull request,
+I would be appreciate if you post an issue unless your change is fixing obvious bugs.<br>
 Thank you!.
