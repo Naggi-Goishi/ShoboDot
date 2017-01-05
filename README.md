@@ -2,7 +2,7 @@
 
 ![ShoboDot Welcome](img/shobodot_welcome.png)
 
-*ShoboDot is a easy way to embed the dots canvas into your app*<br>
+**ShoboDot is a easy way to embed the dots canvas into your app**<br>
 This is all written in pure Javascript.
 
 # How to setup
