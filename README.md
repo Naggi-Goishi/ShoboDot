@@ -1,4 +1,4 @@
-# ShoboDot
+# ShoboDot - A dot canvas written in pure Javascript
 
 ![ShoboDot Welcome](img/shobodot_welcome.png)
 
