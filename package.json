@@ -1,0 +1,17 @@
+{
+  "name": "shobodot",
+  "version": "1.0.0",
+  "description": "shobodot",
+  "main": "index.js",
+  "dependencies": {
+    "mocha": "3.2.0",
+    "chai": "3.5.0",
+    "jsdom": "9.9.1",
+    "mocha-jsdom": "1.1.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Naggi Goishi",
+  "license": "MIT"
+}
