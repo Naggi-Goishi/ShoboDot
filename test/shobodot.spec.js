@@ -2,15 +2,18 @@ const jsdom = require('mocha-jsdom');
 const should = require('chai').should();
 const html = "<div class='shobodot' style='height:100px;width:100px;'></div><audio id='dot' src='sounds/dot.wav'></audio>";
 const ShoboDot = require('../shobodot.min.js').ShoboDot;
+const Dot = require('../shobodot.min.js').Dot;
 const paint = require('../shobodot.min.js').paint;
 const deleteDot = require('../shobodot.min.js').deleteDot;
 const getPositionId = require('../shobodot.min.js').getPositionId;
 const getMouseColor = require('../shobodot.min.js').getMouseColor;
+const Xline = 8;
+const Yline = 8;
 
 describe('ShoboDot', function() {
   this.timeout(15000);
   jsdom();
-  describe('ShoboDot', function() {
+  describe('ShoboDot Object', function() {
     describe('new', function() {
       it('set canvas', function() {
         _setHTML();
@@ -24,16 +27,13 @@ describe('ShoboDot', function() {
           const shobodot = new ShoboDot({ clickFunction: true });
           const dot = _getDot('1');
           dot.click();
-          dot.style.backgroundColor.should.equal('black');
+          dot.style.backgroundColor.should.equal('rgb(0, 0, 0)');
         });
-
-
-
         it('click colorBox', function() {
           const shobodot = new ShoboDot({ clickFunction: true, colorBoxes: true });
           const dot = _getDot('0');
           dot.click();
-          getMouseColor().should.equal('rgb(255, 0, 0)');
+          getMouseColor().should.equal('rgb(240, 248, 255)');
         });
       });
 
@@ -89,7 +89,7 @@ describe('ShoboDot', function() {
 
       paint(dot, 'black', 'player');
       deleteDot(dot);
-      dot.style.backgroundColor.should.equal('white');
+      dot.style.backgroundColor.should.equal('rgb(255, 255, 255)');
     });
 
   });
@@ -101,6 +101,173 @@ describe('ShoboDot', function() {
       getPositionId(5, 5).should.equal(45);
     });
   });
+  // end of describing ShoboDot Object.
+
+  describe('Dot Object', function() {
+    describe('move', function() {
+      describe('up', function() {
+        it("update it's positionId", function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId - Xline;
+          const nextDot = document.getElementById(nextId);
+          dot.moveUp();
+          dot.positionId.should.equal(nextId);
+        });
+
+        it('move class name up', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId - Xline;
+          const nextDot = document.getElementById(nextId);
+          dot.moveUp();
+          nextDot.classList.contains('player').should.equal(true);
+        });
+
+        it('delete backgroundColor of current dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          dot.moveUp();
+          const backgroundColor = document.getElementById(positionId).style.backgroundColor;
+
+          backgroundColor.should.equal('rgb(255, 255, 255)');
+        });
+
+        it('paint backgroundColor of next dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId - Xline;
+          const nextDot = document.getElementById(nextId);
+          dot.moveUp();
+
+          nextDot.style.backgroundColor.should.equal('rgb(240, 248, 255)');
+        });
+      });
+      // end of up
+
+      describe('down', function() {
+        it("update it's positionId", function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId + Xline;
+          const nextDot = document.getElementById(nextId);
+          dot.moveDown();
+          dot.positionId.should.equal(nextId);
+        });
+
+        it('move class name up', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId + Xline;
+          const nextDot = document.getElementById(nextId);
+          dot.moveDown();
+          nextDot.classList.contains('player').should.equal(true);
+        });
+
+        it('delete backgroundColor of current dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          dot.moveDown();
+          const backgroundColor = document.getElementById(positionId).style.backgroundColor;
+
+          backgroundColor.should.equal('rgb(255, 255, 255)');
+        });
+
+        it('paint backgroundColor of next dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId + Xline;
+          const nextDot = document.getElementById(nextId);
+          dot.moveDown();
+
+          nextDot.style.backgroundColor.should.equal('rgb(240, 248, 255)');
+        });
+      });
+      // end of down
+
+      describe('left', function() {
+        it("update it's positionId", function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId - 1;
+          const nextDot = document.getElementById(nextId);
+          dot.moveLeft();
+          dot.positionId.should.equal(nextId);
+        });
+
+        it('move class name up', function() {
+          const positionId = 12;
+          const dot = new Dot(12, 'player', '#f0f8ff');
+          const nextId = positionId - 1;
+          const nextDot = document.getElementById(nextId);
+          dot.moveLeft();
+          nextDot.classList.contains('player').should.equal(true);
+        });
+
+        it('delete backgroundColor of current dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          dot.moveLeft();
+          const backgroundColor = document.getElementById(positionId).style.backgroundColor;
+
+          backgroundColor.should.equal('rgb(255, 255, 255)');
+        });
+
+        it('paint backgroundColor of next dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId - 1;
+          const nextDot = document.getElementById(nextId);
+          dot.moveLeft();
+
+          nextDot.style.backgroundColor.should.equal('rgb(240, 248, 255)');
+        });
+      });
+      // end of left
+
+      describe('right', function() {
+        it("update it's positionId", function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId + 1;
+          const nextDot = document.getElementById(nextId);
+          dot.moveRight();
+          dot.positionId.should.equal(nextId);
+        });
+
+        it('move class name up', function() {
+          const positionId = 12;
+          const dot = new Dot(12, 'player', '#f0f8ff');
+          const nextId = positionId + 1;
+          const nextDot = document.getElementById(nextId);
+          dot.moveRight();
+          nextDot.classList.contains('player').should.equal(true);
+        });
+
+        it('delete backgroundColor of current dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          dot.moveRight();
+          const backgroundColor = document.getElementById(positionId).style.backgroundColor;
+
+          backgroundColor.should.equal('rgb(255, 255, 255)');
+        });
+
+        it('paint backgroundColor of next dot', function() {
+          const positionId = 12;
+          const dot = new Dot(positionId, 'player', '#f0f8ff');
+          const nextId = positionId + 1;
+          const nextDot = document.getElementById(nextId);
+          dot.moveRight();
+
+          nextDot.style.backgroundColor.should.equal('rgb(240, 248, 255)');
+        });
+      });
+      // end of right
+    });
+    // end of move
+  });
+  // end of Dot Object
 
 });
 
